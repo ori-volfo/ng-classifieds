@@ -6,7 +6,7 @@
         .controller("classifiedsCtrl",function($scope, $state, $http, classifiedsFactory, $mdDialog ,$mdSidenav, $mdToast){
             var vm = this;
             vm.openSidebar = openSidebar;
-            vm.closeSidebar = closeSidebar;
+            // vm.closeSidebar = closeSidebar;
             vm.saveClassified = saveClassified;
             vm.deleteClassified = deleteClassified;
             vm.editClassified = editClassified;
@@ -21,19 +21,24 @@
                 vm.categories = getCategories(vm.classifieds);
             });
 
+            $scope.$on('newClassified',function(event, classified){
+                classified.id = vm.classifieds.length +1;
+                vm.classifieds.push(classified);
+                showToast('classified saved');
+            });
 
-            var contact = {
-                name: "Ori Volfovitch",
-                phone: "054-4865862",
-                email: "asd@asdf.com"
-            };
+            // var contact = {
+            //     name: "Ori Volfovitch",
+            //     phone: "054-4865862",
+            //     email: "asd@asdf.com"
+            // };
             function openSidebar(){
                 $state.go('classifieds.new');
             }
 
-            function closeSidebar(){
-                $mdSidenav('left').close();
-            }
+            // function closeSidebar(){
+            //     $mdSidenav('left').close();
+            // }
 
             function saveClassified(classified){
                 if(classified){
