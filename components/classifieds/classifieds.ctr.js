@@ -10,7 +10,7 @@
             vm.saveClassified = saveClassified;
             vm.deleteClassified = deleteClassified;
             vm.editClassified = editClassified;
-            vm.saveEdit = saveEdit;
+            // vm.saveEdit = saveEdit;
             vm.classifieds;
             vm.classified;
             vm.categories;
@@ -21,6 +21,9 @@
                 vm.categories = getCategories(vm.classifieds);
             });
 
+            $scope.$on('editSaved', function(event, message){
+                showToast(message);
+            });
             $scope.$on('newClassified',function(event, classified){
                 classified.id = vm.classifieds.length +1;
                 vm.classifieds.push(classified);
@@ -52,9 +55,10 @@
             }
 
             function editClassified(classified){
-                vm.editing = true;
-                openSidebar();
-                vm.classified = classified;
+                $state.go('classifieds.edit',{
+                    id: classified.id,
+                    classified: classified
+                });
             }
 
             function saveEdit(){
