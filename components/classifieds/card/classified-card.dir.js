@@ -3,23 +3,18 @@
     "use strict";
     angular
         .module('ngClassifieds')
-        .directive('classifiedCard',function () {
-            return{
-                templateUrl: 'components/classifieds/card/classified-card.tpl.html',
-                scope: {
-                    classifieds: '=classifieds',
-                    classifiedFilter: '=classifiedFilter',
-                    category: '=category'
-                },
-                controller: classifiedCardController,
-                controllerAs: "vm"
-            }
+        .component('classifiedCard',{
+            templateUrl: 'components/classifieds/card/classified-card.tpl.html',
+            bindings: {
+                classifieds: '=',
+                classifiedFilter: '=',
+                category: '='
+            },
 
-            function classifiedCardController($state, $scope, $mdDialog){
+            controller: function($state, $scope, $mdDialog){
 
-                var vm = this;
-                vm.editClassified = editClassified;
-                vm.deleteClassified = deleteClassified;
+                this.editClassified = editClassified;
+                this.deleteClassified = deleteClassified;
 
                 function editClassified(classified){
                     $state.go('classifieds.edit',{
@@ -29,14 +24,15 @@
                 }
 
                 function deleteClassified(event, classified){
+                    var classifieds = this.classifieds;
                     var confirm = $mdDialog.confirm()
                         .title('Are you sure you want to delete '+classified.title+'?')
                         .ok('Yes')
                         .cancel('No')
                         .targetEvent(event);
                     $mdDialog.show(confirm).then(function(){
-                        var index = vm.classifieds.indexOf(classified);
-                        vm.classifieds.splice(index, 1);
+                        var index = classifieds.indexOf(classified);
+                        classifieds.splice(index, 1);
                     }, function(){
 
                     });
@@ -52,7 +48,6 @@
                     );
                 }
             }
-
 
         });
 })();
