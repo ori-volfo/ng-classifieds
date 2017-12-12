@@ -13,6 +13,7 @@
             vm.classified;
             vm.categories;
             vm.editing;
+            vm.showFilters;
 
             classifiedsFactory.getClassifieds().then(function(classifieds){
                 vm.classifieds = classifieds.data;
@@ -28,6 +29,9 @@
                 showToast('classified saved');
             });
 
+            $scope.$on('showFilters',function(event, data){
+                vm.showFilters = data;
+            });
 
             function openSidebar(){
                 $state.go('classifieds.new');

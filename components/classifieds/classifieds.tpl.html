@@ -1,20 +1,6 @@
-<md-toolbar>
-    <div class="md-toolbar-tools">
-        <p><strong>ngClassifieds</strong></p>
-        <md-button ng-click="vm.openSidebar()">
-            <md-icon class="mdi mdi-plus-circle"></md-icon>
-            New Classifieds
-        </md-button>
+<toolbar></toolbar>
 
-        <md-button ng-click="showFilters = true">
-            <md-icon class="mdi mdi-magnify"></md-icon>
-            Filters
-        </md-button>
-
-    </div>
-</md-toolbar>
-
-<div class="filters" layout="row" layout-align="center center" ng-show="showFilters">
+<div class="filters" layout="row" layout-align="center center" ng-show="vm.showFilters">
 
     <md-input-container>
         <label>Enter serach term</label>
