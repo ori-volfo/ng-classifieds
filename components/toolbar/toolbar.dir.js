@@ -3,20 +3,12 @@
     "use strict";
     angular
         .module('ngClassifieds')
-        .directive('toolbar',function () {
-            return{
-                templateUrl: 'components/toolbar/toolbar.tpl.html',
-                scope: {
-                    openSidebar: '=openSidebar'
-                },
-                controller: toolbarController,
-                controllerAs: "vm"
-            };
+        .component('toolbar', {
+            templateUrl: 'components/toolbar/toolbar.tpl.html',
 
-            function toolbarController($state,$scope){
-                var vm = this;
-                vm.openSidebar = openSidebar;
-                vm.showFilters = showFilters;
+            controller: function($state,$scope){
+                this.openSidebar = openSidebar;
+                this.showFilters = showFilters;
                 var filtersState = false;
 
                 function openSidebar(){
@@ -27,7 +19,6 @@
                     $scope.$emit('showFilters', filtersState);
                 }
             }
-
 
         });
 })();
