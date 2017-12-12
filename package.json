@@ -22,6 +22,6 @@
     "angular-aria": "^1.6.7",
     "angular-material": "^1.1.5",
     "angular-ui-router": "^0.4.3",
-    "mdi": "^2.0.46"
+    "mdi": "^2.1.19"
   }
 }
